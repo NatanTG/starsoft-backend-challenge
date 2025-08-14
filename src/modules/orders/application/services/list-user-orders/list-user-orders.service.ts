@@ -17,7 +17,7 @@ export class ListUserOrdersService {
 
   async execute(
     payload: ListUserOrdersService.Request,
-  ): Promise<PaginatedResult<OrderEntity>> {
+  ): Promise<PaginatedResult<ListUserOrdersService.Response>> {
     const user = await this.userRepository.findById(payload.userId);
     if (!user) {
       throw new NotFoundException('User not found.');
@@ -28,7 +28,25 @@ export class ListUserOrdersService {
       payload,
     );
 
-    return result;
+    return {
+      ...result,
+      data: result.data.map(order => ({
+        id: order.id,
+        userId: order.userId,
+        status: order.status,
+        totalAmount: order.totalAmount,
+        items: order.items.map(item => ({
+          id: item.id,
+          orderId: item.orderId,
+          productName: item.productName,
+          quantity: item.quantity,
+          price: item.price,
+          subtotal: item.subtotal,
+        })),
+        createdAt: order.createdAt.toISOString(),
+        updatedAt: order.updatedAt.toISOString(),
+      }))
+    };
   }
 }
 
@@ -45,7 +63,15 @@ export namespace ListUserOrdersService {
     userId: string;
     status: string;
     totalAmount: number;
-    createdAt: Date;
-    updatedAt: Date;
+    items: {
+      id: string;
+      orderId: string;
+      productName: string;
+      quantity: number;
+      price: number;
+      subtotal: number;
+    }[];
+    createdAt: string;
+    updatedAt: string;
   };
 }

@@ -15,7 +15,25 @@ export class ListOrdersService {
   ): Promise<PaginatedResult<ListOrdersService.Response>> {
     const result = await this.orderRepository.findAll(payload);
 
-    return result;
+    return {
+      ...result,
+      data: result.data.map(order => ({
+        id: order.id,
+        userId: order.userId,
+        status: order.status,
+        totalAmount: order.totalAmount,
+        items: order.items.map(item => ({
+          id: item.id,
+          orderId: item.orderId,
+          productName: item.productName,
+          quantity: item.quantity,
+          price: item.price,
+          subtotal: item.subtotal,
+        })),
+        createdAt: order.createdAt.toISOString(),
+        updatedAt: order.updatedAt.toISOString(),
+      }))
+    };
   }
 }
 
@@ -26,5 +44,20 @@ export namespace ListOrdersService {
     offset: number;
   };
 
-  export type Response = OrderEntity;
+  export type Response = {
+    id: string;
+    userId: string;
+    status: string;
+    totalAmount: number;
+    items: {
+      id: string;
+      orderId: string;
+      productName: string;
+      quantity: number;
+      price: number;
+      subtotal: number;
+    }[];
+    createdAt: string;
+    updatedAt: string;
+  };
 }
