@@ -4,6 +4,23 @@ Sistema completo de gerenciamento de pedidos para e-commerce com arquitetura ori
 
 ## 🚀 Como Iniciar o Projeto
 
+### 🐳 Início Rápido com Docker (Recomendado)
+
+Para rodar todos os serviços de uma vez:
+
+```bash
+# Rebuild todos os containers (sem usar cache)
+docker compose build --no-cache
+
+# Subir todos os serviços (PostgreSQL, Kafka, Elasticsearch, API, Grafana, Prometheus)
+docker compose up
+```
+
+Aguarde todos os containers ficarem prontos e acesse:
+- **API**: http://localhost:3000
+- **Documentação**: http://localhost:3000/api
+- **Grafana**: http://localhost:3001 (admin/admin)
+
 ### Pré-requisitos
 - **Node.js** 20+ 
 - **pnpm** 10.7.0+ (gerenciador de pacotes)
