@@ -55,7 +55,7 @@ docker compose up
 **Aguarde todos os containers ficarem prontos e acesse:**
 - **🌐 API**: http://localhost:3000
 - **📚 Documentação Swagger**: http://localhost:3000/api
-- **📊 Grafana**: http://localhost:3001 (admin/admin)
+- **📊 Grafana**: http://localhost:3001 (admin/admin) - (Faltou configurar)
 - **🔍 Prometheus**: http://localhost:9090
 - **⚡ Elasticsearch**: http://localhost:9200
 
