@@ -8,6 +8,7 @@
 - [⚡ Quick Start (5 minutos)](#-quick-start-5-minutos)
 - [🔧 Setup Detalhado](#-setup-detalhado)
 - [🏗️ Como o Projeto Funciona](#️-como-o-projeto-funciona)
+- [🔍 Limitações Conhecidas](#-limitações-conhecidas)
 - [📚 Próximos Passos](#-próximos-passos)
 - [❓ FAQ](#-faq)
 
@@ -185,13 +186,27 @@ KAFKA_MOCK_MODE=false
 
 ---
 
+## 🔍 Limitações Conhecidas
+
+⚠️ **Importante**: Este projeto tem algumas limitações técnicas documentadas:
+
+- **📊 Grafana**: Interface funcional, mas dashboards não configurados
+- **🔍 Elasticsearch**: Usando implementação mock para desenvolvimento  
+- **📨 Kafka**: Rodando em modo mock por padrão
+- **🧪 Testes**: Coverage atual de 51% (meta: 80%+)
+
+**📋 Para detalhes completos e roadmap de melhorias, consulte: [🔧 Débitos Técnicos](/docs/TECHNICAL-DEBT.md)**
+
+---
+
 ## 📚 Próximos Passos
 
 ### Para Desenvolvedores
 
 1. **[🏗️ Entenda a Arquitetura](/docs/ARCHITECTURE.md)** - Padrões, estrutura e tecnologias
-2. **[🧪 Teste com Postman](/docs/POSTMAN-GUIDE.md)** - Jornada completa passo-a-passo
-3. **[📡 Explore a API](/docs/API-REFERENCE.md)** - Todos os endpoints detalhados
+2. **[🔧 Consulte os Débitos Técnicos](/docs/TECHNICAL-DEBT.md)** - Limitações atuais e roadmap
+3. **[🧪 Teste com Postman](/docs/POSTMAN-GUIDE.md)** - Jornada completa passo-a-passo
+4. **[📡 Explore a API](/docs/API-REFERENCE.md)** - Todos os endpoints detalhados
 
 ### Para Avaliadores Técnicos
 

@@ -11,6 +11,7 @@
 - [🐳 Infraestrutura Docker](#-infraestrutura-docker)
 - [🎭 Estratégia de Mock vs Real](#-estratégia-de-mock-vs-real)
 - [📊 Monitoramento](#-monitoramento)
+- [⚠️ Limitações Atuais](#️-limitações-atuais)
 - [🚀 Tecnologias Utilizadas](#-tecnologias-utilizadas)
 
 ---
@@ -358,8 +359,25 @@ A arquitetura suporta **ambos os modos** sem alteração de código!
 ### Acesso ao Monitoramento
 
 - **Prometheus**: http://localhost:9090
-- **Grafana**: http://localhost:3001 (admin/admin)
+- **Grafana**: http://localhost:3001 (admin/admin123_secure)
 - **Metrics Endpoint**: http://localhost:3000/metrics
+
+---
+
+## ⚠️ Limitações Atuais
+
+Este projeto possui algumas limitações técnicas que estão documentadas e priorizadas para implementação:
+
+### 🔧 Débitos Técnicos Principais
+
+- **📊 Grafana Dashboards**: Interface funcional mas sem visualizações configuradas
+- **🔍 Elasticsearch**: Usando implementação mock em vez de serviço real
+- **📨 Kafka Events**: Rodando em modo mock por padrão
+- **🧪 Test Coverage**: 51% atual, meta de 80%+
+
+### 📋 Roadmap
+
+Para uma visão completa dos débitos técnicos, priorização e planos de implementação, consulte: **[🔧 Débitos Técnicos & Roadmap](/docs/TECHNICAL-DEBT.md)**
 
 ---
 
@@ -428,7 +446,6 @@ A arquitetura suporta **ambos os modos** sem alteração de código!
 ```json
 {
   "email": "Resend 4.6.0",
-  "file_storage": "AWS S3 SDK 3.846.0",
   "file_upload": "Multer 2.0.2"
 }
 ```

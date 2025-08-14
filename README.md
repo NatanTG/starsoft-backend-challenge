@@ -151,6 +151,7 @@ pnpm dev
 
 - **[🚀 Onboarding Completo](/docs/ONBOARDING.md)** - Guia do desenvolvedor para começar rapidamente
 - **[🏗️ Arquitetura & Infraestrutura](/docs/ARCHITECTURE.md)** - Padrões, tecnologias e estrutura do projeto
+- **[🔧 Débitos Técnicos & Roadmap](/docs/TECHNICAL-DEBT.md)** - Status atual, limitações e próximos passos
 - **[🧪 Guia de Testes Postman](/docs/POSTMAN-GUIDE.md)** - Jornada completa para testar toda a API
 - **[📡 Referência da API](/docs/API-REFERENCE.md)** - Documentação detalhada de todos os endpoints
 
@@ -336,7 +337,6 @@ Serviços configurados:
 
 ### 5. Serviços Externos
 - **Resend** (Email): 🎭 Mockado - Templates para reset de senha e notificações
-- **AWS S3** (Storage): 🎭 Mockado - Upload de arquivos e presigned URLs
 
 ---
 
@@ -466,7 +466,6 @@ pnpm run test:memory
 
 ### Integrações
 - **Resend** (Email Service)
-- **AWS S3** (File Storage)
 - **JWT** (Authentication)
 - **bcrypt** (Password Hashing)
 
@@ -515,7 +514,6 @@ pnpm run test:memory
 
 ### Serviços Externos
 - **resend** ^4.6.0 - Serviço de email
-- **@aws-sdk/client-s3** ^3.846.0 - AWS S3 client
 - **multer** ^2.0.2 - Upload de arquivos
 
 ### Desenvolvimento e Testes
