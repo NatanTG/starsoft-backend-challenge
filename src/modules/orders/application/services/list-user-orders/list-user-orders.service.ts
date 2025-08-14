@@ -3,7 +3,6 @@ import { OrderEntity } from '@/modules/orders/domain/entities/order.entity';
 import { OrderRepository } from '@/modules/orders/infrastructure/repositories/order.repository';
 import { UserRepository } from '@/modules/user/infrastructure/repositories/user.repository';
 import type { PaginatedResult } from '@/shared/types/pagination.types';
-import { NotFound } from '@aws-sdk/client-s3';
 
 @Injectable()
 export class ListUserOrdersService {

@@ -8,7 +8,6 @@ import { KafkaService } from '@/shared/services/kafka/kafka.service';
 import { ElasticsearchService } from '@/shared/services/elasticsearch/elasticsearch.service';
 import { ELASTICSEARCH_INDEXES } from '@/core/config/elasticsearch.config';
 import { MyLogger } from '@/shared/services/logger/structured-logger.service';
-import { NotFound } from '@aws-sdk/client-s3';
 
 @Injectable()
 export class CreateOrderService {
