@@ -8,7 +8,7 @@ import {
   InternalServerErrorResponseDto,
 } from '@/shared/dtos/error-response.dto';
 
-@ApiTags('Authentication')
+@ApiTags('Auth')
 @Controller('auth')
 export class ResetPasswordController {
   constructor(private readonly resetPasswordService: ResetPasswordService) {}

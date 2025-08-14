@@ -9,7 +9,7 @@ import {
 } from '@/shared/dtos/error-response.dto';
 import { SessionUserRequestDto } from '../../application/dtos/requests/session-user-request.dto';
 
-@ApiTags('Authentication')
+@ApiTags('Auth')
 @Controller('auth')
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}

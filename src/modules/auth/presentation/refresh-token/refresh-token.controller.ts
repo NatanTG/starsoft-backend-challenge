@@ -9,7 +9,7 @@ import {
   InternalServerErrorResponseDto,
 } from '@/shared/dtos/error-response.dto';
 
-@ApiTags('Authentication')
+@ApiTags('Auth')
 @Controller('auth')
 export class RefreshTokenController {
   constructor(private readonly refreshTokenService: RefreshTokenService) {}
