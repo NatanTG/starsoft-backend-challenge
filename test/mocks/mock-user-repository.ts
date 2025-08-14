@@ -22,6 +22,7 @@ export class MockUserRepository implements UserRepository {
     
     return {
       id: 'user-123',
+      name: 'Test User',
       email,
       password: 'hashed-password',
       createdAt: new Date(),
@@ -38,6 +39,7 @@ export class MockUserRepository implements UserRepository {
     
     return {
       id,
+      name: 'Test User',
       email: 'user@test.com',
       password: 'hashed-password',
       createdAt: new Date(),

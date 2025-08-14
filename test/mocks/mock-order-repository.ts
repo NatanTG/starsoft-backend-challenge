@@ -13,7 +13,13 @@ export class MockOrderRepository implements OrderRepository {
     this.saveReturn = {
       id: 'order-123',
       userId: order.userId,
-      user: { id: order.userId, email: 'test@example.com' },
+      user: { 
+        id: order.userId, 
+        name: 'Test User',
+        email: 'test@example.com',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
       status: order.status || OrderStatus.PENDING,
       totalAmount: order.totalAmount || 199.99,
       items: order.items || [],
@@ -29,7 +35,13 @@ export class MockOrderRepository implements OrderRepository {
     return {
       id,
       userId: 'user-123',
-      user: { id: 'user-123', email: 'test@example.com' },
+      user: { 
+        id: 'user-123', 
+        name: 'Test User',
+        email: 'test@example.com',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
       status: OrderStatus.PENDING,
       totalAmount: 199.99,
       items: [],
@@ -64,7 +76,13 @@ export class MockOrderRepository implements OrderRepository {
     const order = {
       id: 'order-1',
       userId,
-      user: { id: userId, email: 'test@example.com' },
+      user: { 
+        id: userId, 
+        name: 'Test User',
+        email: 'test@example.com',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
       status: OrderStatus.PENDING,
       totalAmount: 199.99,
       items: [],
@@ -85,7 +103,13 @@ export class MockOrderRepository implements OrderRepository {
     const order = {
       id: 'order-1',
       userId: 'user-123',
-      user: { id: 'user-123', email: 'test@example.com' },
+      user: { 
+        id: 'user-123', 
+        name: 'Test User',
+        email: 'test@example.com',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
       status: OrderStatus.PENDING,
       totalAmount: 199.99,
       items: [],
