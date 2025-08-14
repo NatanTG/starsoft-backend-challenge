@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, CanActivate } from '@nestjs/common';
 import { DeleteOrderController } from './delete-order.controller';
 import { DeleteOrderService } from '@/modules/orders/application/services/delete-order/delete-order.service';
+import { AuthGuard } from '@/shared/guards/jwt-auth-guard';
 
 class MockDeleteOrderService {
   async execute(payload: any): Promise<any> {
@@ -9,6 +10,12 @@ class MockDeleteOrderService {
       throw new NotFoundException('Order not found.');
     }
     return { message: 'Order deleted successfully.' };
+  }
+}
+
+class MockAuthGuard implements CanActivate {
+  canActivate() {
+    return true;
   }
 }
 
@@ -21,7 +28,10 @@ describe('DeleteOrderController', () => {
       providers: [
         { provide: DeleteOrderService, useClass: MockDeleteOrderService },
       ],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useClass(MockAuthGuard)
+      .compile();
 
     controller = module.get<DeleteOrderController>(DeleteOrderController);
   });
@@ -37,6 +47,8 @@ describe('DeleteOrderController', () => {
   });
 
   it('should handle service errors', async () => {
-    await expect(controller.deleteOrder('not-found')).rejects.toThrow(NotFoundException);
+    await expect(controller.deleteOrder('not-found')).rejects.toThrow(
+      NotFoundException,
+    );
   });
 });

@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, CanActivate } from '@nestjs/common';
 import { UpdateOrderController } from './update-order.controller';
 import { UpdateOrderService } from '@/modules/orders/application/services/update-order/update-order.service';
 import { OrderStatus } from '@/modules/orders/domain/enums/order-status.enum';
+import { AuthGuard } from '@/shared/guards/jwt-auth-guard';
 
 class MockUpdateOrderService {
   async execute(payload: any): Promise<any> {
@@ -10,6 +11,12 @@ class MockUpdateOrderService {
       throw new NotFoundException('Order not found.');
     }
     return { id: payload.id, status: payload.status || 'pending' };
+  }
+}
+
+class MockAuthGuard implements CanActivate {
+  canActivate() {
+    return true;
   }
 }
 
@@ -22,7 +29,10 @@ describe('UpdateOrderController', () => {
       providers: [
         { provide: UpdateOrderService, useClass: MockUpdateOrderService },
       ],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useClass(MockAuthGuard)
+      .compile();
 
     controller = module.get<UpdateOrderController>(UpdateOrderController);
   });
@@ -43,6 +53,8 @@ describe('UpdateOrderController', () => {
   it('should handle service errors', async () => {
     const payload = { status: OrderStatus.PROCESSING };
 
-    await expect(controller.updateOrder('not-found', payload)).rejects.toThrow(NotFoundException);
+    await expect(
+      controller.updateOrder('not-found', payload),
+    ).rejects.toThrow(NotFoundException);
   });
 });

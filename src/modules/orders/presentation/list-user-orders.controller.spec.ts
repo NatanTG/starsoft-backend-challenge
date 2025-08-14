@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, CanActivate } from '@nestjs/common';
 import { ListUserOrdersController } from './list-user-orders.controller';
 import { ListUserOrdersService } from '@/modules/orders/application/services/list-user-orders/list-user-orders.service';
+import { AuthGuard } from '@/shared/guards/jwt-auth-guard';
 
 class MockListUserOrdersService {
   async execute(payload: any): Promise<any> {
@@ -9,6 +10,12 @@ class MockListUserOrdersService {
       throw new BadRequestException('User not found.');
     }
     return { data: [], total: 0, page: 1, limit: 10, totalPages: 0 };
+  }
+}
+
+class MockAuthGuard implements CanActivate {
+  canActivate() {
+    return true;
   }
 }
 
@@ -21,7 +28,10 @@ describe('ListUserOrdersController', () => {
       providers: [
         { provide: ListUserOrdersService, useClass: MockListUserOrdersService },
       ],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useClass(MockAuthGuard)
+      .compile();
 
     controller = module.get<ListUserOrdersController>(ListUserOrdersController);
   });
@@ -42,6 +52,8 @@ describe('ListUserOrdersController', () => {
   it('should handle service errors', async () => {
     const query = { page: 1, limit: 10, offset: 0 };
 
-    await expect(controller.listUserOrders('not-found', query)).rejects.toThrow(BadRequestException);
+    await expect(
+      controller.listUserOrders('not-found', query),
+    ).rejects.toThrow(BadRequestException);
   });
 });
