@@ -1,6 +1,105 @@
-# 🛒 E-commerce Order Management API
+<h1 align="center">
+    🛒 E-commerce Order Management API
+</h1>
 
-Sistema completo de gerenciamento de pedidos para e-commerce com arquitetura orientada a eventos (Kafka) e busca avançada (Elasticsearch). Desenvolvido como desafio técnico demonstrando arquitetura modular NestJS, DDD, e integração com serviços externos.
+<p align="center">
+Sistema completo de gerenciamento de pedidos para e-commerce com arquitetura orientada a eventos (Kafka) e busca avançada (Elasticsearch).
+<br/>
+Desenvolvido como desafio técnico demonstrando arquitetura modular NestJS, DDD, e integração com serviços externos.
+<br/>
+<br/>
+<strong>🚀 Novo aqui? Acesse o <a href="/docs/ONBOARDING.md">Onboarding Completo</a></strong>
+</p>
+
+<p align="center">
+  <img alt="Made with Love" src="https://img.shields.io/badge/MADE_WITH-LOVE-032F5B?style=for-the-badge" />
+  <img alt="Node.js" src="https://img.shields.io/badge/NODE.JS-20+-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img alt="NestJS" src="https://img.shields.io/badge/NESTJS-11+-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" />
+  <img alt="Docker" src="https://img.shields.io/badge/DOCKER-READY-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+</p>
+
+## 🚀 Quick Start
+
+### Requisitos
+
+- **Node.js** 20+
+- **pnpm** 10.7.0+
+- **Docker** & **Docker Compose**
+
+### 🐳 Iniciar o projeto (Recomendado)
+
+```bash
+# Clone o repositório
+git clone <repo-url>
+cd starsoft-backend-challenge
+
+# Copie as variáveis de ambiente
+cp .env.example .env
+
+# Execute todo o projeto com Docker
+docker compose up
+```
+
+**Aguarde todos os containers ficarem prontos e acesse:**
+- **🌐 API**: http://localhost:3000
+- **📚 Documentação Swagger**: http://localhost:3000/api
+- **📊 Grafana**: http://localhost:3001 (admin/admin)
+- **🔍 Prometheus**: http://localhost:9090
+- **⚡ Elasticsearch**: http://localhost:9200
+
+## 🔧 Variáveis de Ambiente
+
+| Variável                          | Descrição                                     | Valor Padrão                                    |
+| --------------------------------- | --------------------------------------------- | ----------------------------------------------- |
+| **DATABASE_URL**                  | URL de conexão com PostgreSQL                | postgresql://ecommerce:ecommerce123@localhost:5432/ecommercedb |
+| **POSTGRES_USER**                 | Usuário do banco PostgreSQL                  | ecommerce                                       |
+| **POSTGRES_PASSWORD**             | Senha do banco PostgreSQL                    | ecommerce123                                    |
+| **POSTGRES_DB**                   | Nome do banco de dados                       | ecommercedb                                     |
+| **PORT**                          | Porta da aplicação                            | 3000                                            |
+| **NODE_ENV**                      | Ambiente de execução                          | development                                     |
+| **JWT_SECRET**                    | Chave secreta para JWT                       | your-super-secret-jwt-key-here                  |
+| **DASHBOARD_URL**                 | URL do dashboard frontend                     | http://localhost:5173                           |
+| **CORS_ORIGINS**                  | URLs permitidas para CORS                    | http://localhost:3000,http://localhost:3001     |
+| **KAFKA_BROKERS**                 | Endereços dos brokers Kafka                  | localhost:9092                                  |
+| **KAFKA_CLIENT_ID**               | ID do cliente Kafka                          | ecommerce-api                                   |
+| **KAFKA_MOCK_MODE**               | Ativa modo mock para Kafka                   | false                                           |
+| **ELASTICSEARCH_NODE**            | URL do servidor Elasticsearch                | http://localhost:9200                           |
+| **RESEND_KEY**                    | Chave da API Resend para emails              | your-resend-api-key-here                        |
+| **MAIL_FROM_ADDRESS**             | Email remetente                               | ecommerce@yourdomain.com                        |
+| **GRAFANA_ADMIN_USER**            | Usuário admin do Grafana                     | admin                                           |
+| **GRAFANA_ADMIN_PASSWORD**        | Senha admin do Grafana                       | your-secure-grafana-password                    |
+| **DB_LOGGING**                    | Habilita logs do banco de dados              | true                                            |
+| **DB_SYNCHRONIZE**                | Sincronização automática do schema           | true                                            |
+| **HELMET_HSTS_ENABLED**           | Habilita HSTS no Helmet                      | false                                           |
+
+## 🛠️ Comandos
+
+### Desenvolvimento
+- **pnpm dev**: Executa o servidor em modo desenvolvimento com hot reload
+- **pnpm debug**: Executa em modo debug com breakpoints
+- **pnpm start**: Executa o servidor básico
+- **pnpm start:prod**: Executa em modo produção
+
+### Build e Deploy
+- **pnpm build**: Gera build de produção
+- **pnpm format**: Formata o código automaticamente
+- **pnpm lint**: Executa linting e correções automáticas
+
+### Docker
+- **pnpm run docker:up**: Sobe toda a infraestrutura
+- **pnpm run docker:down**: Para todos os containers
+- **pnpm run docker:logs**: Visualiza logs dos containers
+- **pnpm run docker:build**: Faz build da imagem Docker
+
+### Banco de Dados
+- **pnpm run typeorm:run**: Executa migrations
+- **pnpm run typeorm:generate**: Gera nova migration
+- **pnpm run typeorm:revert**: Reverte última migration
+
+### Testes
+- **pnpm test**: Executa todos os testes
+- **pnpm run test:cov**: Testes com coverage
+- **pnpm run test:watch**: Testes em modo watch
 
 ## 🎯 Contexto do Teste Técnico
 
@@ -30,88 +129,30 @@ Este projeto foi desenvolvido como resposta ao **Teste para Desenvolvedor Back-E
 - **Arquitetura Modular NestJS + DDD** com separação clara de responsabilidades
 - **Observabilidade** com logs estruturados e métricas
 
----
+### 🔧 Instalação Detalhada (Desenvolvimento)
 
-## 🚀 Como Executar o Projeto
-
-### 📋 Pré-requisitos
-
-- **Node.js** 20+
-- **pnpm** 10.7.0+ (gerenciador de pacotes)
-- **Docker & Docker Compose**
-
-### 🐳 Opção 1: Quick Start com Docker (Recomendado)
-
-**Para executar todo o projeto com um único comando:**
+Se preferir instalar e executar em modo desenvolvimento:
 
 ```bash
-# Rebuild todos os containers (sem usar cache)
-docker compose build --no-cache
-
-# Subir todos os serviços (PostgreSQL, Kafka, Elasticsearch, API, Grafana, Prometheus)
-docker compose up
-```
-
-**Aguarde todos os containers ficarem prontos e acesse:**
-- **🌐 API**: http://localhost:3000
-- **📚 Documentação Swagger**: http://localhost:3000/api
-- **📊 Grafana**: http://localhost:3001 (admin/admin) - (Faltou configurar)
-- **🔍 Prometheus**: http://localhost:9090
-- **⚡ Elasticsearch**: http://localhost:9200
-
-### ⚙️ Opção 2: Instalação Detalhada (Desenvolvimento)
-
-#### 1. Clone e Configure o Ambiente
-
-```bash
-git clone <repo-url>
-cd starsoft-backend-challenge
-
-# Copie e configure as variáveis de ambiente
-cp .env.example .env
-# Edite o arquivo .env conforme necessário
-```
-
-#### 2. Instale as Dependências
-
-```bash
-# Instalar dependências do projeto
+# Instalar dependências
 pnpm install
-```
 
-#### 3. Inicie a Infraestrutura com Docker
-
-```bash
-# Subir toda a infraestrutura (PostgreSQL, Kafka, Elasticsearch, Prometheus, Grafana)
+# Subir infraestrutura
 pnpm run docker:up
 
-# Verificar se todos os containers estão rodando
-pnpm run docker:logs
-
-# Para parar os containers
-pnpm run docker:down
-```
-
-#### 4. Execute as Migrações do Banco
-
-```bash
-# Executar migrações do banco de dados
+# Executar migrations
 pnpm run typeorm:run
+
+# Iniciar em modo desenvolvimento
+pnpm dev
 ```
 
-#### 5. Inicie a Aplicação
+## 📚 Documentação
 
-```bash
-# Modo desenvolvimento (com hot reload)
-pnpm run dev
-
-# Modo debug
-pnpm run debug
-
-# Build e execução em produção
-pnpm run build
-pnpm run start:prod
-```
+- **[🚀 Onboarding Completo](/docs/ONBOARDING.md)** - Guia do desenvolvedor para começar rapidamente
+- **[🏗️ Arquitetura & Infraestrutura](/docs/ARCHITECTURE.md)** - Padrões, tecnologias e estrutura do projeto
+- **[🧪 Guia de Testes Postman](/docs/POSTMAN-GUIDE.md)** - Jornada completa para testar toda a API
+- **[📡 Referência da API](/docs/API-REFERENCE.md)** - Documentação detalhada de todos os endpoints
 
 ---
 
@@ -408,77 +449,7 @@ pnpm run test:memory
 
 ---
 
-## 🔧 Configuração de Ambiente
 
-### Variáveis Obrigatórias (.env)
-
-```env
-# Database
-DATABASE_URL=postgresql://ecommerce:ecommerce123@localhost:5432/ecommercedb
-POSTGRES_USER=ecommerce
-POSTGRES_PASSWORD=ecommerce123
-POSTGRES_DB=ecommercedb
-
-# Application
-PORT=3000
-NODE_ENV=development
-JWT_SECRET=your-super-secret-jwt-key-here
-
-# Kafka Configuration
-KAFKA_BROKERS=localhost:9092
-KAFKA_CLIENT_ID=ecommerce-api
-KAFKA_MOCK_MODE=true  # 🎯 true = mock, false = real Kafka
-
-# Elasticsearch
-ELASTICSEARCH_NODE=http://localhost:9200
-
-# Email (Resend)
-RESEND_KEY=your-resend-api-key-here
-MAIL_FROM_ADDRESS=ecommerce@yourdomain.com
-
-# Monitoring
-GRAFANA_ADMIN_USER=admin
-GRAFANA_ADMIN_PASSWORD=your-secure-password
-```
-
----
-
-## 🛠️ Scripts de Desenvolvimento
-
-### Desenvolvimento
-```bash
-pnpm run dev          # Servidor em modo desenvolvimento com hot reload
-pnpm run debug        # Modo debug com breakpoints
-pnpm run start        # Servidor básico
-pnpm run start:prod   # Servidor em modo produção
-```
-
-### Build e Deploy
-```bash
-pnpm run build        # Build da aplicação para produção
-pnpm run format       # Formatação automática do código
-pnpm run format:check # Verificar formatação
-pnpm run lint         # Executar linting e correções automáticas
-```
-
-### Docker
-```bash
-pnpm run docker:build # Build da imagem Docker
-pnpm run docker:up    # Subir toda a infraestrutura
-pnpm run docker:down  # Parar todos os containers
-pnpm run docker:logs  # Visualizar logs dos containers
-```
-
-### Banco de Dados (TypeORM)
-```bash
-pnpm run typeorm:run        # Executar migrations
-pnpm run typeorm:run:prod   # Executar migrations em produção
-pnpm run typeorm:generate   # Gerar nova migration
-pnpm run typeorm:create     # Criar migration vazia
-pnpm run typeorm:revert     # Reverter última migration
-```
-
----
 
 ## 🚀 Tecnologias Utilizadas
 
