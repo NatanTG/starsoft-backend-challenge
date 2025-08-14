@@ -1,10 +1,11 @@
-import { Controller, Get, HttpCode, Param, Query } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Query, UseGuards } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiParam,
   ApiQuery,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { ListUserOrdersService } from '@/modules/orders/application/services/list-user-orders/list-user-orders.service';
 import { PaginationQueryDto } from '@/shared/dtos/pagination-query.dto';
@@ -12,7 +13,9 @@ import { OrderListResponseDto } from '@/modules/orders/application/dtos/response
 import {
   ValidationErrorResponseDto,
   InternalServerErrorResponseDto,
+  UnauthorizedErrorResponseDto,
 } from '@/shared/dtos/error-response.dto';
+import { AuthGuard } from '@/shared/guards/jwt-auth-guard';
 
 @ApiTags('Orders')
 @Controller('orders')
@@ -21,6 +24,8 @@ export class ListUserOrdersController {
 
   @Get('/user/:userId')
   @HttpCode(200)
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'List user orders',
     description: 'Get paginated list of orders for a specific user',
@@ -41,6 +46,11 @@ export class ListUserOrdersController {
     status: 400,
     description: 'User not found',
     type: ValidationErrorResponseDto,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - Invalid or missing token',
+    type: UnauthorizedErrorResponseDto,
   })
   @ApiResponse({
     status: 500,

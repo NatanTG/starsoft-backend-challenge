@@ -1,5 +1,5 @@
-import { Body, Controller, HttpCode, Param, Patch } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { Body, Controller, HttpCode, Param, Patch, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBearerAuth } from '@nestjs/swagger';
 import { UpdateOrderService } from '@/modules/orders/application/services/update-order/update-order.service';
 import { UpdateOrderRequestDto } from '@/modules/orders/application/dtos/requests/update-order-request.dto';
 import { OrderResponseDto } from '@/modules/orders/application/dtos/responses/order-response.dto';
@@ -7,7 +7,9 @@ import {
   ValidationErrorResponseDto,
   NotFoundErrorResponseDto,
   InternalServerErrorResponseDto,
+  UnauthorizedErrorResponseDto,
 } from '@/shared/dtos/error-response.dto';
+import { AuthGuard } from '@/shared/guards/jwt-auth-guard';
 
 @ApiTags('Orders')
 @Controller('orders')
@@ -16,6 +18,8 @@ export class UpdateOrderController {
 
   @Patch('/:id')
   @HttpCode(200)
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Update order',
     description: 'Update order status and other modifiable fields',
@@ -35,6 +39,11 @@ export class UpdateOrderController {
     status: 400,
     description: 'Invalid order status',
     type: ValidationErrorResponseDto,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - Invalid or missing token',
+    type: UnauthorizedErrorResponseDto,
   })
   @ApiResponse({
     status: 404,
